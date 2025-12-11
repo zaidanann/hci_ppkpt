@@ -201,71 +201,96 @@ export default function PPKPTLandingPage() {
         </div>
       </section>
 
-      {/* NEWS */}
-      <section id="news" className="mt-20">
-        <div className="max-w-7xl mx-auto px-4">
+      {/* News Section */}
+<section id="news" className="">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <h2 className="text-4xl font-bold text-blue-900 mb-12 text-center mt-20">
+      PUBLIKASI & EDUKASI
+    </h2>
 
-          <h2 className="text-3xl sm:text-4xl font-bold text-blue-900 text-center mb-10">
-            PUBLIKASI & EDUKASI
-          </h2>
+    <div className="relative flex items-center justify-center gap-4 sm:gap-6">
 
-          <div className="relative flex items-center justify-center gap-4">
+      {/* Button Prev */}
+      <button
+        onClick={prevNews}
+        className="p-2 rounded-full hover:bg-gray-200 transition-colors"
+        aria-label="Previous news"
+      >
+        <ChevronLeft className="w-7 h-7 sm:w-8 sm:h-8 text-blue-900" />
+      </button>
 
-            {/* Prev */}
-            <button onClick={prevNews} className="p-2 hover:bg-gray-100 rounded-full">
-              <ChevronLeft className="w-7 h-7 text-blue-900" />
-            </button>
+      {/* Slider Wrapper */}
+      <div className="relative w-full max-w-6xl overflow-hidden">
 
-            {/* Slides */}
-            <div className="relative w-full max-w-6xl h-auto sm:h-96">
+        {newsItems.map((item, index) => (
+          <div
+            key={index}
+            className={`absolute inset-0 transition-all duration-500
+              ${index === currentNews ? "opacity-100 translate-x-0" : "opacity-0 translate-x-full"}
+            `}
+          >
+            {/* Responsive Content */}
+            <div className="rounded-2xl shadow-lg overflow-hidden p-4 sm:p-6 
+                            flex flex-col md:flex-row gap-4 sm:gap-6 h-auto">
 
-              {newsItems.map((item, index) => (
-                <div
-                  key={index}
-                  className={`absolute inset-0 transition-all duration-500 ${
-                    index === currentNews ? "opacity-100 translate-x-0" : "opacity-0 translate-x-full"
-                  }`}
-                >
-                  <div className="rounded-2xl overflow-hidden shadow-lg p-4 sm:p-6 flex flex-col sm:flex-row gap-6 h-auto sm:h-full">
+              {/* LEFT — IMAGE */}
+              <div className="w-full md:w-1/2 relative rounded-xl overflow-hidden h-56 sm:h-72 md:h-auto">
+                <img
+                  src={item.image}
+                  alt={item.subtitleImage}
+                  className="w-full h-full object-cover"
+                />
 
-                    {/* Left: Image */}
-                    <div className="w-full sm:w-1/2 relative rounded-xl overflow-hidden h-64 sm:h-full">
-                      <img src={item.image} className="w-full h-full object-cover" />
-                      <div className="absolute bottom-0 bg-black/60 text-white p-3">
-                        {item.subtitleImage}
-                      </div>
-                    </div>
+                <div className="absolute bottom-0 inset-x-0 p-3 bg-gradient-to-t from-black/70 to-transparent">
+                  <p className="text-white font-semibold text-sm sm:text-base">
+                    {item.subtitleImage}
+                  </p>
+                </div>
+              </div>
 
-                    {/* Right: Video */}
-                    <div 
-                      className="w-full sm:w-1/2 relative rounded-xl overflow-hidden h-64 sm:h-full group cursor-pointer"
-                      onClick={() => handleVideoClick(item.videoId)}
-                    >
-                      <img src={item.videoThumbnail} className="w-full h-full object-cover" />
-                      <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 flex items-center justify-center transition">
-                        <div className="w-14 h-14 sm:w-20 sm:h-20 bg-red-600 rounded-full flex items-center justify-center">
-                          <Play className="text-white w-8 h-8 sm:w-10 sm:h-10 ml-1" />
-                        </div>
-                      </div>
-                      <div className="absolute bottom-0 bg-black/60 text-white p-3">
-                        {item.subtitleVideo}
-                      </div>
-                    </div>
+              {/* RIGHT — VIDEO */}
+              <div
+                className="w-full md:w-1/2 relative rounded-xl overflow-hidden h-56 sm:h-72 md:h-auto group cursor-pointer"
+                onClick={() => handleVideoClick(item.videoId)}
+              >
+                <img
+                  src={item.videoThumbnail}
+                  alt={item.subtitleVideo}
+                  className="w-full h-full object-cover"
+                />
 
+                <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-all 
+                                flex items-center justify-center">
+                  <div className="w-16 h-16 sm:w-20 sm:h-20 bg-red-600 rounded-full 
+                                  flex items-center justify-center group-hover:scale-110 
+                                  transition-transform shadow-lg">
+                    <Play className="w-8 h-8 sm:w-10 sm:h-10 text-white ml-1" />
                   </div>
                 </div>
-              ))}
 
+                <div className="absolute bottom-0 inset-x-0 p-3 bg-gradient-to-t from-black/70 to-transparent">
+                  <p className="text-white font-semibold text-sm sm:text-base">
+                    {item.subtitleVideo}
+                  </p>
+                </div>
+              </div>
             </div>
-
-            {/* Next */}
-            <button onClick={nextNews} className="p-2 hover:bg-gray-100 rounded-full">
-              <ChevronRight className="w-7 h-7 text-blue-900" />
-            </button>
-
           </div>
-        </div>
-      </section>
+        ))}
+
+      </div>
+
+      {/* Button Next */}
+      <button
+        onClick={nextNews}
+        className="p-2 rounded-full hover:bg-gray-200 transition-colors"
+        aria-label="Next news"
+      >
+        <ChevronRight className="w-7 h-7 sm:w-8 sm:h-8 text-blue-900" />
+      </button>
+    </div>
+  </div>
+</section>
 
     </div>
   );
