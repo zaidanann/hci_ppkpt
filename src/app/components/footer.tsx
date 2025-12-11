@@ -3,26 +3,26 @@ export default function Footer() {
   return (
     <footer
       className="text-white py-10 mt-10"
-      style={{ backgroundColor: "#006198" }} // GANTI WARNA DI SINI
+      style={{ backgroundColor: "#006198" }}
     >
-      <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-10">
+      <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row md:items-center justify-between gap-10">
 
-        {/* LOGO KIRI */}
-        <div className="shrink-0">
+        {/* LOGO */}
+        <div className="flex justify-center md:justify-start w-full md:w-auto">
           <img
             src="/image/logoputih.png"
             alt="Logo PPKPT Paramadina"
-            className="h-20 w-auto object-contain scale-[1.9]"
+            className="h-16 md:h-20 w-auto object-contain scale-150 md:scale-[1.9]"
             style={{ transformOrigin: "left center" }}
           />
         </div>
 
-        {/* 3 KOLOM KANAN */}
-        <div className="grid grid-cols-1 md:grid-cols-3 text-center gap-10">
+        {/* 3 KOLOM */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 text-center gap-8 md:gap-12 w-full">
 
           {/* ALAMAT */}
           <div>
-            <img src="/image/lokasi.png" className="h-7 mx-auto mb-3" alt="Location" />
+            <img src="/image/lokasi.png" className="h-6 md:h-7 mx-auto mb-3" alt="Location" />
             <p className="font-bold text-lg">Alamat</p>
             <p className="text-sm opacity-90">Universitas Paramadina</p>
             <p className="text-sm opacity-90">Cipayung, Jakarta Timur</p>
@@ -30,22 +30,24 @@ export default function Footer() {
 
           {/* EMAIL */}
           <div>
-            <img src="/image/email.png" className="h-7 mx-auto mb-3" alt="Email" />
+            <img src="/image/email.png" className="h-6 md:h-7 mx-auto mb-3" alt="Email" />
             <p className="font-bold text-lg">Email</p>
-            <a href="mailto:satgas.ppkpt@paramadina.ac.id" className="text-sm hover:underline opacity-90">
+            <a
+              href="mailto:satgas.ppkpt@paramadina.ac.id"
+              className="text-sm hover:underline opacity-90 break-words"
+            >
               satgas.ppkpt@paramadina.ac.id
             </a>
           </div>
 
           {/* HOTLINE */}
           <div>
-            <img src="/image/hotline.png" className="h-7 mx-auto mb-3" alt="Phone" />
+            <img src="/image/hotline.png" className="h-6 md:h-7 mx-auto mb-3" alt="Hotline" />
             <p className="font-bold text-lg">Hotline</p>
             <p className="text-sm opacity-90">0858-1319-9452</p>
           </div>
 
         </div>
-
       </div>
     </footer>
   );
