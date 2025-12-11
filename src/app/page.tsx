@@ -161,7 +161,7 @@ export default function PPKPTLandingPage() {
               </h2>
 
               <p className="text-gray-700 mb-6 leading-relaxed">
-                PPKPT Universitas Paramadina...
+                PPKPT Universitas Paramadina berkomitmen untuk memberikan layanan konsultasi pengaduan dan publikasi kegiatan yang mendukung penguatan kapasitas perempuan dan anak lingkungan kampus Paramadina dan masyarakat
               </p>
 
               <a 
