@@ -1,7 +1,8 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { ChevronLeft, ChevronRight, Play } from 'lucide-react';
+import { ChevronLeft, ChevronRight, MapPin, Mail, Phone, Play } from 'lucide-react';
+import Image from 'next/image';
 
 export default function PPKPTLandingPage() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -35,8 +36,8 @@ export default function PPKPTLandingPage() {
       videoThumbnail: "https://img.youtube.com/vi/AaTYHDI-o1w/maxresdefault.jpg",
       subtitleImage: "Kegiatan Sosialisasi PPKPT",
       subtitleVideo: "Video Edukasi 1",
-      descriptionImage: "Workshop dan sosialisasi tentang pencegahan kekerasan di kampus",
-      descriptionVideo: "Video edukasi tentang cara mencegah dan melaporkan pelecehan seksual"
+      descriptionImage: "Workshop dan sosialisasi...",
+      descriptionVideo: "Video edukasi..."
     },
     {
       image: "https://fs.uin-antasari.ac.id/wp-content/uploads/2023/03/kekerasan-seksual-islam-kartun.jpg",
@@ -44,8 +45,8 @@ export default function PPKPTLandingPage() {
       videoThumbnail: "https://img.youtube.com/vi/93FiM3tWT0g/maxresdefault.jpg",
       subtitleImage: "Kegiatan Edukasi Mahasiswa",
       subtitleVideo: "Video Edukasi 2",
-      descriptionImage: "Seminar tentang edukasi anti kekerasan di kampus",
-      descriptionVideo: "Video edukasi untuk mahasiswa"
+      descriptionImage: "Seminar edukasi...",
+      descriptionVideo: "Video edukasi mahasiswa"
     },
     {
       image: "https://statik.unesa.ac.id/plb/thumbnail/1c92bc98-d817-4045-a449-e90af057dd04.jpg",
@@ -53,17 +54,18 @@ export default function PPKPTLandingPage() {
       videoThumbnail: "https://img.youtube.com/vi/qY_HPz6gMSA/maxresdefault.jpg",
       subtitleImage: "Kegiatan Sosialisasi Lanjutan",
       subtitleVideo: "Video Edukasi 3",
-      descriptionImage: "Kegiatan lanjutan pencegahan kekerasan di kampus",
-      descriptionVideo: "Video edukasi tambahan untuk mahasiswa"
+      descriptionImage: "Kegiatan lanjutan...",
+      descriptionVideo: "Video edukasi tambahan"
     }
   ];
 
+  // Auto slide
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
     }, 5000);
     return () => clearInterval(timer);
-  }, []);
+  }, [heroSlides.length]);
 
   const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
   const prevSlide = () => setCurrentSlide((prev) => (prev - 1 + heroSlides.length) % heroSlides.length);
@@ -72,135 +74,199 @@ export default function PPKPTLandingPage() {
   const prevNews = () => setCurrentNews((prev) => (prev - 1 + newsItems.length) % newsItems.length);
 
   const handleVideoClick = (videoId: string) => {
-    window.open(`https://www.youtube.com/watch?v=${videoId}`, "_blank");
+    window.open(`https://www.youtube.com/watch?v=${videoId}`, '_blank');
   };
 
   return (
     <div className="min-h-screen">
 
-      {/* HERO SECTION (lebih responsif) */}
+      {/* HERO SECTION */}
       <section
         id="home"
-        className="relative h-[70vh] md:h-[90vh] flex items-center bg-cover bg-center bg-no-repeat px-4"
+        className="relative h-[60vh] sm:h-[70vh] md:h-[90vh] flex items-center bg-cover bg-center"
         style={{
           backgroundImage: `
-            linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.5)),
+            linear-gradient(to bottom, rgba(210,227,236,0.6), rgba(231,238,245,0.6)),
             url('${heroSlides[currentSlide].background}')
           `
         }}
       >
-        <button
-          onClick={prevSlide}
-          className="absolute left-2 top-1/2 -translate-y-1/2 p-2 bg-white/30 rounded-full text-white"
-        >
-          <ChevronLeft className="w-6 h-6" />
-        </button>
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-black/40 md:bg-black/20"></div>
 
-        <div className="text-center md:text-left max-w-lg mx-auto md:mx-16">
-          <h1 className="text-3xl md:text-5xl font-bold text-white drop-shadow-lg mb-5">
-            {heroSlides[currentSlide].title}
-          </h1>
+        <div className="relative z-10 w-full">
+          <div className="max-w-7xl mx-auto px-4">
+            <div className="flex items-center justify-between">
 
-          <a
-            href={heroSlides[currentSlide].link}
-            className="inline-flex bg-white/90 text-blue-900 px-6 py-2 rounded-full font-semibold"
-          >
-            {heroSlides[currentSlide].buttonText}
-          </a>
-
-          {/* INDICATORS */}
-          <div className="flex gap-2 mt-5 justify-center md:justify-start">
-            {heroSlides.map((_, index) => (
+              {/* Prev Button */}
               <button
-                key={index}
-                onClick={() => setCurrentSlide(index)}
-                className={`h-2 rounded-full transition-all ${
-                  index === currentSlide ? "w-8 bg-white" : "w-2 bg-white/60"
-                }`}
-              />
-            ))}
+                onClick={prevSlide}
+                className="p-1 sm:p-2 rounded-full hover:bg-white/40 transition z-20"
+              >
+                <ChevronLeft className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
+              </button>
+
+              {/* Main Content */}
+              <div className="flex-1 flex items-center justify-center px-4 sm:px-12 text-center">
+                <div className="max-w-xl">
+                  <h1 className="text-2xl sm:text-3xl md:text-5xl font-bold text-white mb-6 drop-shadow-xl">
+                    {heroSlides[currentSlide].title}
+                  </h1>
+
+                  <a
+                    href={heroSlides[currentSlide].link}
+                    className="inline-flex bg-white/80 hover:bg-white text-blue-900 font-semibold px-6 py-2 sm:px-8 sm:py-3 rounded-full"
+                  >
+                    {heroSlides[currentSlide].buttonText}
+                    <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 ml-2" />
+                  </a>
+
+                  {/* Indicators */}
+                  <div className="flex gap-2 mt-6 justify-center">
+                    {heroSlides.map((_, i) => (
+                      <button
+                        key={i}
+                        onClick={() => setCurrentSlide(i)}
+                        className={`h-2 rounded-full transition-all ${
+                          currentSlide === i ? "w-8 bg-white" : "w-2 bg-white/60"
+                        }`}
+                      />
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Next Button */}
+              <button
+                onClick={nextSlide}
+                className="p-1 sm:p-2 rounded-full hover:bg-white/40 transition z-20"
+              >
+                <ChevronRight className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
+              </button>
+
+            </div>
           </div>
         </div>
-
-        <button
-          onClick={nextSlide}
-          className="absolute right-2 top-1/2 -translate-y-1/2 p-2 bg-white/30 rounded-full text-white"
-        >
-          <ChevronRight className="w-6 h-6" />
-        </button>
       </section>
 
-      {/* NEWS SECTION – Mobile jadi vertikal */}
-      <section id="news" className="mt-20 px-4">
-        <h2 className="text-3xl md:text-4xl font-bold text-blue-900 text-center mb-8">
-          PUBLIKASI & EDUKASI
-        </h2>
+      {/* ABOUT */}
+      <section id="about" className="mt-10">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="flex flex-col lg:flex-row items-start gap-10 lg:gap-16">
 
-        <div className="flex justify-center items-center gap-4">
-          <button
-            onClick={prevNews}
-            className="p-2 rounded-full bg-blue-100 hover:bg-blue-200"
-          >
-            <ChevronLeft className="w-6 h-6 text-blue-900" />
-          </button>
+            {/* Left text */}
+            <div className="flex-1">
+              <h2 className="text-3xl sm:text-4xl font-bold text-blue-900 mb-6 mt-6">
+                ABOUT US
+              </h2>
 
-          <div className="w-full max-w-5xl">
-            {newsItems.map((item, index) => (
-              <div
-                key={index}
-                className={`transition-all duration-500 ${
-                  index === currentNews ? "block opacity-100" : "hidden opacity-0"
-                }`}
+              <p className="text-gray-700 mb-6 leading-relaxed">
+                PPKPT Universitas Paramadina...
+              </p>
+
+              <a 
+                href="/abaut"
+                className="inline-flex text-blue-900 border-2 border-blue-900 px-6 py-2 rounded-full hover:bg-blue-900 hover:text-white"
               >
-                <div className="rounded-2xl shadow-lg overflow-hidden p-4 flex flex-col md:flex-row gap-4">
+                Selengkapnya <ChevronRight className="ml-2 w-5 h-5" />
+              </a>
+            </div>
 
-                  {/* FOTO */}
-                  <div className="w-full md:w-1/2 relative">
-                    <img
-                      src={item.image}
-                      alt={item.subtitleImage}
-                      className="w-full h-56 md:h-full object-cover rounded-xl"
-                    />
-                    <p className="absolute bottom-2 left-2 bg-black/50 text-white px-3 py-1 rounded-lg text-sm">
-                      {item.subtitleImage}
-                    </p>
-                  </div>
+            {/* Right Buttons */}
+            <div className="flex flex-col sm:flex-row gap-6">
 
-                  {/* VIDEO */}
-                  <div
-                    className="w-full md:w-1/2 relative group cursor-pointer"
-                    onClick={() => handleVideoClick(item.videoId)}
-                  >
-                    <img
-                      src={item.videoThumbnail}
-                      alt={item.subtitleVideo}
-                      className="w-full h-56 md:h-full object-cover rounded-xl"
-                    />
+              {/* Konsultasi */}
+              <a 
+                href={`https://api.whatsapp.com/send?phone=+6285813199452&text=${encodeURIComponent("Halo, saya ingin konsultasi dengan Satgas PPKPT Paramadina.")}`}
+                target="_blank"
+                className="bg-gradient-to-br from-[#1C4B69] to-[#A6CDE4] rounded-3xl p-6 sm:p-8 text-white w-full sm:w-64 h-72 flex flex-col items-center justify-center text-center shadow-lg hover:scale-105 transition"
+              >
+                <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center mb-4 text-3xl">👥</div>
+                <h3 className="text-xl font-bold">KONSULTASI</h3>
+                <p className="text-sm mt-2 opacity-90">Layanan konsultasi profesional</p>
+              </a>
 
-                    <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
-                      <div className="w-14 h-14 md:w-20 md:h-20 bg-red-600 rounded-full flex items-center justify-center group-hover:scale-110 transition">
-                        <Play className="w-8 h-8 md:w-10 md:h-10 text-white ml-1" />
+              {/* Pengaduan */}
+              <a 
+                href="/pengaduan"
+                className="bg-gradient-to-br from-[#1C4B69] to-[#A6CDE4] rounded-3xl p-6 sm:p-8 text-white w-full sm:w-64 h-72 flex flex-col items-center justify-center text-center shadow-lg hover:scale-105 transition"
+              >
+                <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center mb-4 text-3xl">📋</div>
+                <h3 className="text-xl font-bold">PENGADUAN</h3>
+                <p className="text-sm mt-2 opacity-90">Laporkan kejadian kekerasan</p>
+              </a>
+
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* NEWS */}
+      <section id="news" className="mt-20">
+        <div className="max-w-7xl mx-auto px-4">
+
+          <h2 className="text-3xl sm:text-4xl font-bold text-blue-900 text-center mb-10">
+            PUBLIKASI & EDUKASI
+          </h2>
+
+          <div className="relative flex items-center justify-center gap-4">
+
+            {/* Prev */}
+            <button onClick={prevNews} className="p-2 hover:bg-gray-100 rounded-full">
+              <ChevronLeft className="w-7 h-7 text-blue-900" />
+            </button>
+
+            {/* Slides */}
+            <div className="relative w-full max-w-6xl h-auto sm:h-96">
+
+              {newsItems.map((item, index) => (
+                <div
+                  key={index}
+                  className={`absolute inset-0 transition-all duration-500 ${
+                    index === currentNews ? "opacity-100 translate-x-0" : "opacity-0 translate-x-full"
+                  }`}
+                >
+                  <div className="rounded-2xl overflow-hidden shadow-lg p-4 sm:p-6 flex flex-col sm:flex-row gap-6 h-auto sm:h-full">
+
+                    {/* Left: Image */}
+                    <div className="w-full sm:w-1/2 relative rounded-xl overflow-hidden h-64 sm:h-full">
+                      <img src={item.image} className="w-full h-full object-cover" />
+                      <div className="absolute bottom-0 bg-black/60 text-white p-3">
+                        {item.subtitleImage}
                       </div>
                     </div>
 
-                    <p className="absolute bottom-2 left-2 bg-black/50 text-white px-3 py-1 rounded-lg text-sm">
-                      {item.subtitleVideo}
-                    </p>
+                    {/* Right: Video */}
+                    <div 
+                      className="w-full sm:w-1/2 relative rounded-xl overflow-hidden h-64 sm:h-full group cursor-pointer"
+                      onClick={() => handleVideoClick(item.videoId)}
+                    >
+                      <img src={item.videoThumbnail} className="w-full h-full object-cover" />
+                      <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 flex items-center justify-center transition">
+                        <div className="w-14 h-14 sm:w-20 sm:h-20 bg-red-600 rounded-full flex items-center justify-center">
+                          <Play className="text-white w-8 h-8 sm:w-10 sm:h-10 ml-1" />
+                        </div>
+                      </div>
+                      <div className="absolute bottom-0 bg-black/60 text-white p-3">
+                        {item.subtitleVideo}
+                      </div>
+                    </div>
+
                   </div>
-
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
 
-          <button
-            onClick={nextNews}
-            className="p-2 rounded-full bg-blue-100 hover:bg-blue-200"
-          >
-            <ChevronRight className="w-6 h-6 text-blue-900" />
-          </button>
+            </div>
+
+            {/* Next */}
+            <button onClick={nextNews} className="p-2 hover:bg-gray-100 rounded-full">
+              <ChevronRight className="w-7 h-7 text-blue-900" />
+            </button>
+
+          </div>
         </div>
       </section>
+
     </div>
   );
 }
