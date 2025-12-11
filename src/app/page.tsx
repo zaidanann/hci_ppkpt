@@ -201,7 +201,7 @@ export default function PPKPTLandingPage() {
         </div>
       </section>
 
-      {/* News Section */}
+{/* News Section */}
 <section id="news" className="">
   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <h2 className="text-4xl font-bold text-blue-900 mb-12 text-center mt-20">
@@ -214,44 +214,41 @@ export default function PPKPTLandingPage() {
       <button
         onClick={prevNews}
         className="p-2 rounded-full hover:bg-gray-200 transition-colors"
-        aria-label="Previous news"
       >
         <ChevronLeft className="w-7 h-7 sm:w-8 sm:h-8 text-blue-900" />
       </button>
 
-      {/* Slider Wrapper */}
-      <div className="relative w-full max-w-6xl overflow-hidden">
+      {/* SLIDER FIX */}
+      <div className="w-full max-w-6xl overflow-hidden min-h-[450px] sm:min-h-[520px]">
 
         {newsItems.map((item, index) => (
           <div
             key={index}
-            className={`absolute inset-0 transition-all duration-500
-              ${index === currentNews ? "opacity-100 translate-x-0" : "opacity-0 translate-x-full"}
+            className={`transition-all duration-500 
+              ${index === currentNews ? "opacity-100" : "opacity-0 hidden"}
             `}
           >
-            {/* Responsive Content */}
+            {/* Konten Slide */}
             <div className="rounded-2xl shadow-lg overflow-hidden p-4 sm:p-6 
-                            flex flex-col md:flex-row gap-4 sm:gap-6 h-auto">
+                            flex flex-col md:flex-row gap-4 sm:gap-6">
 
               {/* LEFT — IMAGE */}
-              <div className="w-full md:w-1/2 relative rounded-xl overflow-hidden h-56 sm:h-72 md:h-auto">
+              <div className="w-full md:w-1/2 rounded-xl overflow-hidden h-56 sm:h-72 md:h-[420px]">
                 <img
                   src={item.image}
                   alt={item.subtitleImage}
                   className="w-full h-full object-cover"
                 />
-
-                <div className="absolute bottom-0 inset-x-0 p-3 bg-gradient-to-t from-black/70 to-transparent">
-                  <p className="text-white font-semibold text-sm sm:text-base">
-                    {item.subtitleImage}
-                  </p>
+                <div className="p-3 bg-gradient-to-t from-black/70 to-transparent mt-[-70px] relative">
+                  <p className="text-white font-semibold">{item.subtitleImage}</p>
                 </div>
               </div>
 
               {/* RIGHT — VIDEO */}
               <div
-                className="w-full md:w-1/2 relative rounded-xl overflow-hidden h-56 sm:h-72 md:h-auto group cursor-pointer"
                 onClick={() => handleVideoClick(item.videoId)}
+                className="w-full md:w-1/2 rounded-xl overflow-hidden h-56 sm:h-72 md:h-[420px] 
+                           group cursor-pointer relative"
               >
                 <img
                   src={item.videoThumbnail}
@@ -259,38 +256,39 @@ export default function PPKPTLandingPage() {
                   className="w-full h-full object-cover"
                 />
 
-                <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-all 
+                {/* Play Overlay */}
+                <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40
                                 flex items-center justify-center">
-                  <div className="w-16 h-16 sm:w-20 sm:h-20 bg-red-600 rounded-full 
+                  <div className="w-16 h-16 sm:w-20 sm:h-20 bg-red-600 rounded-full
                                   flex items-center justify-center group-hover:scale-110 
                                   transition-transform shadow-lg">
                     <Play className="w-8 h-8 sm:w-10 sm:h-10 text-white ml-1" />
                   </div>
                 </div>
 
-                <div className="absolute bottom-0 inset-x-0 p-3 bg-gradient-to-t from-black/70 to-transparent">
-                  <p className="text-white font-semibold text-sm sm:text-base">
-                    {item.subtitleVideo}
-                  </p>
+                <div className="absolute bottom-0 inset-x-0 p-3 
+                                bg-gradient-to-t from-black/70 to-transparent">
+                  <p className="text-white font-semibold">{item.subtitleVideo}</p>
                 </div>
               </div>
+
             </div>
           </div>
         ))}
-
       </div>
 
       {/* Button Next */}
       <button
         onClick={nextNews}
         className="p-2 rounded-full hover:bg-gray-200 transition-colors"
-        aria-label="Next news"
       >
         <ChevronRight className="w-7 h-7 sm:w-8 sm:h-8 text-blue-900" />
       </button>
+
     </div>
   </div>
 </section>
+
 
     </div>
   );
