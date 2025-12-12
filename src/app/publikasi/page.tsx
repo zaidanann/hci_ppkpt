@@ -256,8 +256,8 @@ Meskipun Undang-Undang Tindak Pidana Kekerasan Seksual (UU TPKS) telah ada, impl
                 <div 
                   key={item.id}
                   onClick={() => handleOpenDetail(item)}
-                  className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow cursor-pointer"
-                >
+                  className="rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow cursor-pointer"
+                style={{ backgroundColor: "#006198" }}>
                   <div className="h-48 bg-gray-300 relative overflow-hidden">
                     <Image 
                       src={item.image} 
