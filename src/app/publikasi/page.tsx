@@ -4,14 +4,12 @@ import React, { useState } from 'react';
 import { Calendar, ArrowLeft } from 'lucide-react';
 import Image from 'next/image';
 
-// Tipe untuk publikasi (Tulisan atau Laporan)
 type Publikasi = {
   id: number;
   judul: string;
   tanggal: string;
   image: string;
   konten: string;
-  kategori?: string;
 };
 
 export default function PublikasiPPKPT() {
@@ -195,9 +193,8 @@ Meskipun Undang-Undang Tindak Pidana Kekerasan Seksual (UU TPKS) telah ada, impl
   ];
 
   // Ambil laporan lain untuk sidebar (exclude yang sedang dibuka)
-  const getLaporanLainnya = () => {
-    return publikasiLaporan.filter(item => item.id !== selectedItem?.id).slice(0, 5);
-  };
+  const getLaporanLainnya = () =>
+    publikasiLaporan.filter(item => item.id !== selectedItem?.id).slice(0, 5);
 
   const handleOpenDetail = (item: Publikasi) => {
     setSelectedItem(item);
@@ -213,34 +210,40 @@ Meskipun Undang-Undang Tindak Pidana Kekerasan Seksual (UU TPKS) telah ada, impl
   return (
     <div className="min-h-screen">
       {view === 'list' ? (
-        /* List View */
-        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        /* ================= LIST VIEW ================= */
+        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+
           {/* Publikasi Tulisan */}
-          <section className="mb-20">
-            <h2 className="text-4xl font-bold text-blue-900 text-center mb-12">Publikasi Tulisan</h2>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {publikasiTulisan.map((item) => (
-                <div 
+          <section className="mb-16 sm:mb-20">
+            <h2 className="text-2xl sm:text-4xl font-bold text-blue-900 text-center mb-8 sm:mb-12">
+              Publikasi Tulisan
+            </h2>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
+              {publikasiTulisan.map(item => (
+                <div
                   key={item.id}
                   onClick={() => handleOpenDetail(item)}
                   className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow cursor-pointer"
                 >
-                  <div className="h-48 bg-gray-300 relative overflow-hidden">
-                    <Image 
-                      src={item.image} 
+                  <div className="h-40 sm:h-48 relative overflow-hidden">
+                    <Image
+                      src={item.image}
                       alt={item.judul}
                       width={400}
                       height={300}
-                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                      className="w-full h-full object-cover"
                     />
                   </div>
-                  <div className="p-4" style={{ backgroundColor: "#006198" }}>
-                    <div className="flex items-center gap-2 text-white text-sm mb-2">
+
+                  <div className="p-4 bg-[#006198]">
+                    <div className="flex items-center gap-2 text-white text-xs sm:text-sm mb-2">
                       <Calendar className="w-4 h-4" />
-                      <span>{item.tanggal}</span>
+                      {item.tanggal}
                     </div>
-                    <h3 className="text-white font-semibold">{item.judul}</h3>
+                    <h3 className="text-white font-semibold text-sm sm:text-base">
+                      {item.judul}
+                    </h3>
                   </div>
                 </div>
               ))}
@@ -249,30 +252,35 @@ Meskipun Undang-Undang Tindak Pidana Kekerasan Seksual (UU TPKS) telah ada, impl
 
           {/* Publikasi Laporan */}
           <section>
-            <h2 className="text-4xl font-bold text-blue-900 text-center mb-12">Publikasi Laporan</h2>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {publikasiLaporan.map((item) => (
-                <div 
+            <h2 className="text-2xl sm:text-4xl font-bold text-blue-900 text-center mb-8 sm:mb-12">
+              Publikasi Laporan
+            </h2>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
+              {publikasiLaporan.map(item => (
+                <div
                   key={item.id}
                   onClick={() => handleOpenDetail(item)}
-                  className="rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow cursor-pointer"
-                style={{ backgroundColor: "#006198" }}>
-                  <div className="h-48 bg-gray-300 relative overflow-hidden">
-                    <Image 
-                      src={item.image} 
+                  className="rounded-2xl overflow-hidden shadow-lg hover:shadow-xl cursor-pointer bg-[#006198]"
+                >
+                  <div className="h-40 sm:h-48 relative overflow-hidden">
+                    <Image
+                      src={item.image}
                       alt={item.judul}
                       width={400}
                       height={300}
-                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                      className="w-full h-full object-cover"
                     />
                   </div>
-                  <div className="p-4" style={{ backgroundColor: "#006198" }}>
-                    <div className="flex items-center gap-2 text-white text-sm mb-2">
+
+                  <div className="p-4">
+                    <div className="flex items-center gap-2 text-white text-xs sm:text-sm mb-2">
                       <Calendar className="w-4 h-4" />
-                      <span>{item.tanggal}</span>
+                      {item.tanggal}
                     </div>
-                    <h3 className="text-white font-semibold">{item.judul}</h3>
+                    <h3 className="text-white font-semibold text-sm sm:text-base">
+                      {item.judul}
+                    </h3>
                   </div>
                 </div>
               ))}
@@ -280,67 +288,69 @@ Meskipun Undang-Undang Tindak Pidana Kekerasan Seksual (UU TPKS) telah ada, impl
           </section>
         </main>
       ) : (
-        /* Detail View - Layout seperti gambar */
-        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {/* Main Content - 2/3 width */}
+        /* ================= DETAIL VIEW ================= */
+        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
+
+            {/* Main Content */}
             <div className="lg:col-span-2">
-              <h1 className="text-4xl font-bold text-blue-900 mb-8">Detail Laporan</h1>
-              
-              {/* Cover Image */}
-              <div className="bg-white rounded-3xl p-8 shadow-lg mb-8">
-                <div className="text-center">
-                  <div className="w-full max-w-sm mx-auto [3/4] bg-gray-200 rounded-2xl overflow-hidden shadow-md mb-4">
-                    <Image 
-                      src={selectedItem?.image || ''} 
-                      alt="Cover Laporan"
-                      width={400}
-                      height={533}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <p className="text-2xl font-bold text-gray-800">Cover Laporan</p>
+              <h1 className="text-2xl sm:text-4xl font-bold text-blue-900 mb-6 sm:mb-8">
+                Detail Laporan
+              </h1>
+
+              {/* Cover */}
+              <div className="bg-white rounded-3xl p-5 sm:p-8 shadow-lg mb-6 sm:mb-8">
+                <div className="max-w-xs sm:max-w-sm mx-auto rounded-2xl overflow-hidden shadow-md">
+                  <Image
+                    src={selectedItem?.image || ''}
+                    alt="Cover"
+                    width={400}
+                    height={533}
+                    className="w-full h-auto object-cover"
+                  />
                 </div>
               </div>
 
-              {/* Judul Laporan Box */}
-              <div className="rounded-3xl p-6 shadow-lg mb-8" style={{ backgroundColor: "#006198" }}>
-                <h2 className="text-white text-lg font-semibold leading-relaxed">
+              {/* Judul */}
+              <div className="rounded-3xl p-5 sm:p-6 shadow-lg mb-6 sm:mb-8 bg-[#006198]">
+                <h2 className="text-white text-sm sm:text-lg font-semibold leading-relaxed">
                   {selectedItem?.judul}
                 </h2>
               </div>
 
-              {/* Content */}
-              <div className="rounded-3xl p-8 shadow-lg" style={{ backgroundColor: "#006198" }}>
-                <p className="text-white leading-relaxed text-justify whitespace-pre-line">
+              {/* Konten */}
+              <div className="rounded-3xl p-5 sm:p-8 shadow-lg bg-[#006198]">
+                <p className="text-white text-sm sm:text-base leading-relaxed whitespace-pre-line text-justify">
                   {selectedItem?.konten}
                 </p>
               </div>
 
-              {/* Back Button */}
+              {/* Back */}
               <button
                 onClick={handleBackToList}
-                className="mt-8 flex items-center gap-2 text-white font-bold px-8 py-3 rounded-full hover:opacity-90 transition-opacity"
-                style={{ backgroundColor: "#006198" }}
+                className="mt-6 sm:mt-8 flex items-center gap-2 text-white font-bold px-6 sm:px-8 py-3 rounded-full bg-[#006198]"
               >
                 <ArrowLeft className="w-5 h-5" />
                 Kembali
               </button>
             </div>
 
-            {/* Sidebar - 1/3 width */}
+            {/* Sidebar */}
             <div className="lg:col-span-1">
-              <h2 className="text-3xl font-bold text-blue-900 mb-6">Laporan Lainnya</h2>
-              <div className="space-y-4">
-                {getLaporanLainnya().map((item) => (
+              <h2 className="text-xl sm:text-3xl font-bold text-blue-900 mb-4 sm:mb-6">
+                Laporan Lainnya
+              </h2>
+
+              <div className="space-y-3 sm:space-y-4">
+                {getLaporanLainnya().map(item => (
                   <div
                     key={item.id}
                     onClick={() => handleOpenDetail(item)}
-                    className="rounded-2xl p-4 shadow-lg cursor-pointer hover:opacity-90 transition-opacity"
-                    style={{ backgroundColor: "#006198" }}>
-                    <div className="flex items-start gap-2 text-white text-sm mb-2">
-                      <Calendar className="w-4 h-4 mt-0.5 shrink-0" />
-                      <span>{item.tanggal}</span>
+                    className="rounded-2xl p-4 shadow-lg cursor-pointer bg-[#006198]"
+                  >
+                    <div className="flex items-start gap-2 text-white text-xs sm:text-sm mb-2">
+                      <Calendar className="w-4 h-4 shrink-0" />
+                      {item.tanggal}
                     </div>
                     <h3 className="text-white font-semibold text-sm leading-snug">
                       {item.judul}
@@ -349,6 +359,7 @@ Meskipun Undang-Undang Tindak Pidana Kekerasan Seksual (UU TPKS) telah ada, impl
                 ))}
               </div>
             </div>
+
           </div>
         </main>
       )}
